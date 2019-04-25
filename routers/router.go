@@ -18,19 +18,11 @@ var routes []Route
 // init method which will be automatically run 
 func init() {
 
-	// init root URL and handler function  
-	routes = append(routes, Route{
-		Name:        "Index",
-		Methods:     []string{"GET"},
-		Pattern:     "/",
-		HandlerFunc: handlers.Index,
-	})
-
 	/* init /status URL and handler function. */
 	routes = append(routes, Route{
 		Name:        "Status",
 		Methods:     []string{"GET"},
-		Pattern:     "/status",
+		Pattern:     "/",
 		HandlerFunc: handlers.HandleStatus,
 	})
 }

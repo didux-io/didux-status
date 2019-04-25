@@ -9,6 +9,6 @@ import (
 
 func main() {
 	router := routers.NewRouter()
-	fmt.Printf("Listening on to localhost:5000\n")
+	fmt.Printf("Listening on localhost:5000\n")
 	log.Fatal(http.ListenAndServe(":5000", router))
 }
