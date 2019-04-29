@@ -1,11 +1,16 @@
 package models
 
 import (
-	"web3go/common"
 	"math/big"
+	"web3go/common"
 )
 
 type Status struct {
+	Smilo 		Smilo
+	System 		System
+}
+
+type Smilo struct {
 	Network				string
 	Address   			string
 	BlockHeight 		*big.Int
@@ -13,13 +18,16 @@ type Status struct {
 	Txpool				*common.Txpool
 	NodeInfo			*common.NodeInfo
 	ConnectedPeers		[]common.Peer
-	System				System
+
 }
 
 type System struct {
 	OS							string
 	Host						string
 	Uptime						uint64
+	Load1m						float64
+	Load5m						float64
+	Load15m						float64
 	Processes					uint64
 	TotalMemory					uint64
 	FreeMemory					uint64

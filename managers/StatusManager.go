@@ -3,6 +3,8 @@ package managers
 import (
 	"flag"
 	"fmt"
+	"github.com/shirou/gopsutil/host"
+	"github.com/shirou/gopsutil/load"
 	"math/big"
 	"runtime"
 	"smilo-status/models"
@@ -12,9 +14,7 @@ import (
 	"web3go/web3"
 
 	"github.com/shirou/gopsutil/disk"
-	"github.com/shirou/gopsutil/host"
 	"github.com/shirou/gopsutil/mem"
-	"github.com/shirou/gopsutil/net"
 )
 
 var hostname = flag.String("hostname", "localhost", "The Smilo client RPC host")
@@ -32,6 +32,11 @@ var err error
 
 //Return Status.
 func GetStatus() models.Status {
+	return models.Status{Smilo: GetSmilo(), System: GetSystemStatus()}
+}
+
+// Return Go-Smilo overview
+func GetSmilo() models.Smilo {
 
 	flag.Parse()
 
@@ -76,7 +81,7 @@ func GetStatus() models.Status {
 	}
 
 	// Return status of localhost here!!!
-	return models.Status{Network: "Smilo", Address: defaultAccount.String(), BlockHeight: blockHeight, PeerCount: connectedPeers, Txpool: txpool, NodeInfo: adminInfo, ConnectedPeers: peers, System: GetSystemStatus()}
+	return models.Smilo{Network: "Smilo", Address: defaultAccount.String(), BlockHeight: blockHeight, PeerCount: connectedPeers, Txpool: txpool, NodeInfo: adminInfo, ConnectedPeers: peers}
 }
 
 //Return Status.
@@ -93,16 +98,16 @@ func GetSystemStatus() models.System {
 		fmt.Printf("%v", err)
 	}
 
-	hostStat, err := host.Info()
+	loadStats, err := load.Avg()
 	if err != nil {
 		fmt.Printf("%v", err)
 	}
 
-	// get interfaces MAC/hardware address
-	interfStat, err := net.Interfaces()
-	if err != nil {
-		fmt.Printf("%v", interfStat)
-	}
+	hostInfo, err := host.Info()
 
-	return models.System{OS: runtimeOS, Host: hostStat.Hostname, Uptime: hostStat.Uptime, Processes: hostStat.Procs, TotalMemory: vmStat.Total, FreeMemory: vmStat.Free, MemoryUsage: vmStat.UsedPercent, TotalDiskSpace: diskStat.Total, UsedDiskSpace: diskStat.Used, FreeDiskSpace: diskStat.Free, DiskSpaceUsage: diskStat.UsedPercent}
+
+	return models.System{OS: runtimeOS, Host: hostInfo.Hostname, Uptime: hostInfo.Uptime,
+	Load1m: loadStats.Load1, Load5m: loadStats.Load5, Load15m: loadStats.Load15, Processes: hostInfo.Procs,
+	TotalMemory: vmStat.Total, FreeMemory: vmStat.Free, MemoryUsage: vmStat.UsedPercent,
+	TotalDiskSpace: diskStat.Total, UsedDiskSpace: diskStat.Used, FreeDiskSpace: diskStat.Free, DiskSpaceUsage: diskStat.UsedPercent}
 }
