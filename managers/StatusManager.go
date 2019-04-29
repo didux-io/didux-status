@@ -14,8 +14,8 @@ import (
 	"smilo-status/models"
 )
 
-//var hostname = flag.String("hostname", "localhost", "The Smilo client RPC host")
-var hostname = flag.String("hostname", "18.202.153.27", "The Smilo client RPC host")
+var hostname = flag.String("hostname", "localhost", "The Smilo client RPC host")
+//var hostname = flag.String("hostname", "18.202.153.27", "The Smilo client RPC host -- For testing!")
 var port = flag.String("port", "22000", "The smilo client RPC port")
 var verbose = flag.Bool("verbose", false, "Print verbose messages")
 var defaultAccount common.Address
