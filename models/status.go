@@ -13,6 +13,21 @@ type Status struct {
 	Txpool				*common.Txpool
 	NodeInfo			*common.NodeInfo
 	ConnectedPeers		[]common.Peer
+	System				System
+}
+
+type System struct {
+	OS							string
+	Host						string
+	Uptime						uint64
+	Processes					uint64
+	TotalMemory					uint64
+	FreeMemory					uint64
+	MemoryUsage					float64
+	TotalDiskSpace				uint64
+	UsedDiskSpace   			uint64
+	FreeDiskSpace 				uint64
+	DiskSpaceUsage	     		float64
 }
 
 type Result struct {
