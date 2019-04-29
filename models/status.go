@@ -7,11 +7,10 @@ import (
 
 type Status struct {
 	Network				string
-	NetworkId			*big.Int
 	Address   			string
 	BlockHeight 		*big.Int
 	PeerCount     		uint64
-	PendingTransactions uint
+	Txpool				*common.Txpool
 	NodeInfo			*common.NodeInfo
 	ConnectedPeers		[]common.Peer
 }

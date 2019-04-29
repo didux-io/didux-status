@@ -1,17 +1,14 @@
 package managers
 
 import (
+	"flag"
+	"fmt"
+	"math/big"
+	"smilo-status/models"
 	"web3go/common"
 	"web3go/provider"
 	"web3go/rpc"
 	"web3go/web3"
-	"context"
-	"flag"
-	"fmt"
-	"go-smilo/src/blockchain/smilobft/ethclient"
-	"log"
-	"math/big"
-	"smilo-status/models"
 )
 
 var hostname = flag.String("hostname", "localhost", "The Smilo client RPC host")
@@ -23,6 +20,8 @@ var connectedPeers uint64
 var blockHeight *big.Int
 var adminInfo *common.NodeInfo
 var peers []common.Peer
+var txpool *common.Txpool
+var err error
 
 
 //Return Status.
@@ -35,23 +34,15 @@ func GetStatus() models.Status {
 	}
 
 	/**
-	 * Connecting to provider with ethclient
-	 */
-	ctx := context.Background()
-	client, err := ethclient.Dial("http://"+*hostname+":"+*port)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	networkId, err := client.NetworkID(ctx)
-	pendingTransactions, err := client.PendingTransactionCount(ctx)
-
-	/**
 	 * Connecting to provider with web3go
 	 */
 	provider := provider.NewHTTPProvider(*hostname+":"+*port, rpc.GetDefaultMethod())
 	web3 := web3.NewWeb3(provider)
+
+	// Get TxPool
+	if txpool, err = web3.Txpool.Status(); err != nil {
+		fmt.Printf("%v", err)
+	}
 
 	// Get Coinbase
 	if defaultAccount, err = web3.Eth.Coinbase(); err != nil {
@@ -79,5 +70,5 @@ func GetStatus() models.Status {
 	}
 
 	// Return status of localhost here!!!
-	return models.Status{Network: "Smilo", NetworkId: networkId, Address: defaultAccount.String(), BlockHeight: blockHeight, PeerCount: connectedPeers, PendingTransactions: pendingTransactions, NodeInfo: adminInfo, ConnectedPeers: peers}
+	return models.Status{Network: "Smilo", Address: defaultAccount.String(), BlockHeight: blockHeight, PeerCount: connectedPeers, Txpool: txpool, NodeInfo: adminInfo, ConnectedPeers: peers}
 }
