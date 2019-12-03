@@ -6,11 +6,11 @@ import (
 )
 
 type Status struct {
-	Smilo 		Smilo
+	Didux 		Didux
 	System 		System
 }
 
-type Smilo struct {
+type Didux struct {
 	Network				string
 	Address   			string
 	BlockHeight 		*big.Int

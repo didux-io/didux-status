@@ -1,29 +1,29 @@
 #!/usr/bin/env bash
 
-.PHONY: smilo-status-linux-amd64
+.PHONY: didux-status-linux-amd64
 
 
-COMPANY=Smilo
-AUTHOR=go-smilo
+COMPANY=Didux
+AUTHOR=go-didux
 
-DIR = $(shell pwd)
-PACKAGES = $(shell find ./src -type d -not -path '\./src')
+DIR=$(shell pwd)
+PACKAGES=$(shell find ./src -type d -not -path '\./src')
 
-SRC_DIR = "src/"
+SRC_DIR="src/"
 
 
-GOBIN = $(shell pwd)/build/bin
+GOBIN=$(shell pwd)/build/bin
 GO ?= 1.11
 
 run:
 	go run main.go
 
 build: clean
-	go build -o smilo-status main.go
+	go build -o didux-status main.go
 
 linux:
 	./bin/xgo --go=$(GO) --targets=linux/amd64 -v $(shell pwd)
 	@echo "Linux amd64 cross compilation done:"
-	@ls -ld $(shell pwd)/smilo-status-linux-amd64 | grep amd64
+	@ls -ld $(shell pwd)/didux-status-linux-amd64 | grep amd64
 
 # ********* END BUILD TASKS *********

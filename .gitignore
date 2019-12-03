@@ -7,6 +7,7 @@
 _obj
 _test
 .vscode
+.idea
 
 # Architecture specific extensions/prefixes
 *.[568vq]
@@ -79,5 +80,5 @@ $RECYCLE.BIN/
 vendor
 
 # build
-smilo-status-*
-smilo-status
+didux-status-*
+didux-status

@@ -3,7 +3,7 @@ package handlers
 import (
 	"encoding/json"
 	"net/http"
-	"smilo-status/managers"
+	"didux-status/managers"
 )
 
 // handlerFunction for / (root)

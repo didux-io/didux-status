@@ -2,7 +2,7 @@ package routers
 
 import (
 	"net/http"
-	"smilo-status/handlers"
+	"didux-status/handlers"
 	"github.com/gorilla/mux"
 )
 

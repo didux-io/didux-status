@@ -1,1 +1,1 @@
-# smilo-status
+# didux-status

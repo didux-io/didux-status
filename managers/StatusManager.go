@@ -7,7 +7,7 @@ import (
 	"github.com/shirou/gopsutil/load"
 	"math/big"
 	"runtime"
-	"smilo-status/models"
+	"didux-status/models"
 	"web3go/common"
 	"web3go/provider"
 	"web3go/rpc"
@@ -17,9 +17,9 @@ import (
 	"github.com/shirou/gopsutil/mem"
 )
 
-var hostname = flag.String("hostname", "localhost", "The Smilo client RPC host")
-//var hostname = flag.String("hostname", "18.202.153.27", "The Smilo client RPC host -- For testing!")
-var port = flag.String("port", "22000", "The smilo client RPC port")
+var hostname = flag.String("hostname", "localhost", "The Didux client RPC host")
+//var hostname = flag.String("hostname", "18.202.153.27", "The Didux client RPC host -- For testing!")
+var port = flag.String("port", "22000", "The didux client RPC port")
 var verbose = flag.Bool("verbose", false, "Print verbose messages")
 var defaultAccount common.Address
 var connectedPeers uint64
@@ -32,11 +32,11 @@ var err error
 
 //Return Status.
 func GetStatus() models.Status {
-	return models.Status{Smilo: GetSmilo(), System: GetSystemStatus()}
+	return models.Status{Didux: GetDidux(), System: GetSystemStatus()}
 }
 
-// Return Go-Smilo overview
-func GetSmilo() models.Smilo {
+// Return Go-Didux overview
+func GetDidux() models.Didux {
 
 	flag.Parse()
 
@@ -81,7 +81,7 @@ func GetSmilo() models.Smilo {
 	}
 
 	// Return status of localhost here!!!
-	return models.Smilo{Network: "Smilo", Address: defaultAccount.String(), BlockHeight: blockHeight, PeerCount: connectedPeers, Txpool: txpool, NodeInfo: adminInfo, ConnectedPeers: peers}
+	return models.Didux{Network: "Didux", Address: defaultAccount.String(), BlockHeight: blockHeight, PeerCount: connectedPeers, Txpool: txpool, NodeInfo: adminInfo, ConnectedPeers: peers}
 }
 
 //Return Status.
