@@ -18,7 +18,7 @@ GO ?= 1.11
 run:
 	go run main.go
 
-build: clean
+build:
 	go build -o didux-status main.go
 
 linux:
