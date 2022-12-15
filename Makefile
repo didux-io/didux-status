@@ -7,13 +7,13 @@ COMPANY=Didux
 AUTHOR=go-didux
 
 DIR=$(shell pwd)
-PACKAGES=$(shell find ./src -type d -not -path '\./src')
+PACKAGES=$(shell find ./ -type d -not -path '\./')
 
-SRC_DIR="src/"
+SRC_DIR="./"
 
 
 GOBIN=$(shell pwd)/build/bin
-GO ?= 1.11
+GO ?= 1.13
 
 run:
 	go run main.go
@@ -22,8 +22,7 @@ build:
 	go build -o didux-status main.go
 
 linux:
-	./bin/xgo --go=$(GO) --targets=linux/amd64 -v $(shell pwd)
-	@echo "Linux amd64 cross compilation done:"
-	@ls -ld $(shell pwd)/didux-status-linux-amd64 | grep amd64
+	env GOOS=linux GOARCH=amd64 go build -o didux-status main.go
+	@echo "Linux amd64 cross compilation done"
 
 # ********* END BUILD TASKS *********

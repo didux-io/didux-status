@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"net/http"
 	"didux-status/handlers"
 	"github.com/gorilla/mux"
+	"net/http"
 )
 
 type Route struct {
@@ -15,7 +15,7 @@ type Route struct {
 
 var routes []Route
 
-// init method which will be automatically run 
+// init method which will be automatically run
 func init() {
 
 	/* init /status URL and handler function. */
@@ -25,12 +25,26 @@ func init() {
 		Pattern:     "/",
 		HandlerFunc: handlers.HandleStatus,
 	})
+
+	routes = append(routes, Route{
+		Name:        "StatusCode",
+		Methods:     []string{"GET"},
+		Pattern:     "/status",
+		HandlerFunc: handlers.HandleStatusCode,
+	})
+
+	routes = append(routes, Route{
+		Name:        "BlockNumber",
+		Methods:     []string{"GET"},
+		Pattern:     "/block",
+		HandlerFunc: handlers.HandleBlock,
+	})
 }
 
 /* registering all url paths */
 func NewRouter() *mux.Router {
 
-	router := mux.NewRouter().StrictSlash(true)
+	router := mux.NewRouter().StrictSlash(false)
 
 	for _, route := range routes {
 		var handler http.Handler
