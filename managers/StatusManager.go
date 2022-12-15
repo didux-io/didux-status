@@ -22,7 +22,7 @@ import (
 	"github.com/shirou/gopsutil/mem"
 )
 
-var hostname = flag.String("hostname", "37.59.131.19", "The Didux client RPC host")
+var hostname = flag.String("hostname", "localhost", "The Didux client RPC host")
 
 // var hostname = flag.String("hostname", "18.202.153.27", "The Didux client RPC host -- For testing!")
 var port = flag.String("port", "22000", "The didux client RPC port")
