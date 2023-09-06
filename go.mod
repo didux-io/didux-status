@@ -8,9 +8,13 @@ require (
 )
 
 require (
-	github.com/Smilo-platform/web3go v0.0.0-20190429085319-17085955b0b3 // indirect
-	github.com/ethereum/go-ethereum v1.10.26
-	github.com/go-ole/go-ole v1.2.4 // indirect
+	github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 // indirect
+	github.com/go-ole/go-ole v1.2.6 // indirect
+	github.com/kr/pretty v0.3.1 // indirect
+	github.com/stretchr/testify v1.8.1
+	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/tonnerre/golang-go.crypto v0.0.0-20140219195149-9bbb332f040b
-	gopkg.in/robfig/cron.v2 v2.0.0-20150107220207-be2e0b0deed5 // indirect
+	golang.org/x/sys v0.9.0 // indirect
+	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
+	gopkg.in/robfig/cron.v2 v2.0.0-20150107220207-be2e0b0deed5
 )
